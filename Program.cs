@@ -28,6 +28,17 @@ namespace CodeWars
             {
                 Console.WriteLine(item.Age);
             }
+
+            List<Orders> orders = new List<Orders>
+            {
+                new Orders{Id = 1, Items = new List<string>{"bottle", "cup"}},
+                new Orders{Id = 2, Items = new List<string>{"book", "glasses"}}
+            };
+
+            foreach(var i in NestedCollections.ItemsFromOrders(orders))
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
