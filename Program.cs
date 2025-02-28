@@ -39,6 +39,13 @@ namespace CodeWars
             {
                 Console.WriteLine(i);
             }
+
+            List<int> salaries = new List<int> { 400, 100, 300, 1100 };
+
+            foreach(var i in Aggregating.GetSpecificSalaries(salaries))
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
