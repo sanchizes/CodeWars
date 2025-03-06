@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace CodeWars
 {
+
+
     internal class Program
     {
         static void Main(string[] args)
@@ -18,6 +20,33 @@ namespace CodeWars
 
             Random random = new Random();
             int randomNumber = random.Next(1, 5);
+
+            People first_patient = new People("Teo", 24, People.Gender.Man);
+            Console.WriteLine(first_patient.Name);
+
+            Box<int> box1 = new Box<int>(545, "Nothing");
+            Box<string> box2 = new Box<string>("Twenty eight", "Something");
+
+            int num = box1.GetValue();
+           
+            Console.WriteLine(num);
+
+            box1.SetValue(12);
+            Console.WriteLine(box1.Value);
+            box1.PrintType(box1.Value);
+
+            Console.WriteLine(CompareValues(12, 12));
+            Console.WriteLine(CompareValues("str", "new"));
+
+            Console.WriteLine(RemoveAnchor.RemoveUrlAnchor("www.codewars.com/katas/?page=1"));
+
+            Console.WriteLine(AscendingList.ListFormat({1,2,3,5,6,8,9}));
+                
+        }
+
+        static bool CompareValues<T>(T value1, T value2)
+        {
+            return Object.Equals(value1, value2);
         }
 
         enum MonthOfYear
