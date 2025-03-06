@@ -6,24 +6,19 @@ using System.Threading.Tasks;
 
 namespace CodeWars
 {
-    internal class People
+    abstract class People
     {
-        public string Name { get; set; }
-        int Age { get; set; }
-        //Gender Gender { get; set; }
-
-        public People( string name, int age, Gender gender)
+        public virtual void Eat()
         {
-            Name = name;
-            Age = age;
+            Console.WriteLine("Eating some food!");
         }
+    }
 
-        public enum Gender
+    class Student : People
+    {
+        public override void Eat()
         {
-            Man = 1,
-            Woman = 2,
-            Other = 0
-
+            base.Eat();
         }
     }
 }
