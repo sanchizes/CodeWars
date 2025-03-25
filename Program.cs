@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+
 
 namespace CodeWars
 {
@@ -14,37 +16,42 @@ namespace CodeWars
 
     internal class Program
     {
-        static void Main(string[] args)
+        //static void Main(string[] args)
+        //{
+
+        //}
+        static async Task Main()
         {
-            foreach(var item in ArrayDiff.Diff([1,2], [1]))
-            {
-                Console.WriteLine(item);
-            }
-
-            FilterGeese.GooseFilter(["Mallard", "Hook Bill", "African", "Crested", "Pilgrim", "Toulouse", "Blue Swedish"]).ToList().ForEach(Console.WriteLine);
-
-            Console.WriteLine(StringRepeat.RepeatMethod(7, "suka"));
-
-            foreach(var str in SortArrayByLength.SortArrayMethod(["", "Moderately", "Brains", "Pizza"]))
-            {
-                Console.WriteLine(str);
-            }
-
-            Thread myThread = new Thread(Output);
-
-            myThread.Start();
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine($"Main thread: {i}");
-            }
-
+            await ProcessDataAsync();
         }
-        static void Output()
+
+        static async Task<string> FetchDataAsync(string source)
         {
-            for (int i = 0; i < 5; i++)
+            Random random = new Random();
+            int delay = random.Next(1000, 3000);
+
+            await Task.Delay(delay);
+
+            return $"Data from {source}";
+        }
+
+        static async Task ProcessDataAsync()
+        {
+            List<Task<string>> tasks = new List<Task<string>>
             {
-                Console.WriteLine($"Secondary thread: {i}");
+                FetchDataAsync("API"),
+                FetchDataAsync("DataBase"),
+                FetchDataAsync("File")
+
+            };
+
+            while (tasks.Count > 0)
+            {
+                Task<string> completedTask = await Task.WhenAny(tasks);
+                tasks.Remove(completedTask);
+
+                string result = await completedTask;
+                Console.WriteLine(result);
             }
         }
     }
