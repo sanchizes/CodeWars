@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 
 namespace CodeWars
 {
+
+
     internal class Program
     {
         static void Main(string[] args)
