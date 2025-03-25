@@ -1,5 +1,10 @@
 ﻿using CodeWars.Katas;
 using CodeWars.LinqTasks;
+using CodeWars.ListPractice;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 
@@ -9,42 +14,35 @@ namespace CodeWars
     {
         static void Main(string[] args)
         {
-            List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            List<string> strings = new List<string> { "word", "sun", "Oleksandr" };
-
-            List<Person> people = new List<Person>
+            foreach(var item in ArrayDiff.Diff([1,2], [1]))
             {
-                new Person("Alice", 25),
-                new Person("Jack", 20),
-                new Person("Ray", 56),
-                new Person("Charlie", 28),
-                new Person("David", 40)
-            };
-
-            List<int> nums = new List<int> { -1, -15, 0, 55, -2 };
-
-            GroupItems.GetGrouped(people);
-            foreach(var item in people)
-            {
-                Console.WriteLine(item.Age);
+                Console.WriteLine(item);
             }
 
-            List<Orders> orders = new List<Orders>
-            {
-                new Orders{Id = 1, Items = new List<string>{"bottle", "cup"}},
-                new Orders{Id = 2, Items = new List<string>{"book", "glasses"}}
-            };
+            FilterGeese.GooseFilter(["Mallard", "Hook Bill", "African", "Crested", "Pilgrim", "Toulouse", "Blue Swedish"]).ToList().ForEach(Console.WriteLine);
 
-            foreach(var i in NestedCollections.ItemsFromOrders(orders))
+            Console.WriteLine(StringRepeat.RepeatMethod(7, "suka"));
+
+            foreach(var str in SortArrayByLength.SortArrayMethod(["", "Moderately", "Brains", "Pizza"]))
             {
-                Console.WriteLine(i);
+                Console.WriteLine(str);
             }
 
-            List<int> salaries = new List<int> { 400, 100, 300, 1100 };
+            Thread myThread = new Thread(Output);
 
-            foreach(var i in Aggregating.GetSpecificSalaries(salaries))
+            myThread.Start();
+
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine(i);
+                Console.WriteLine($"Main thread: {i}");
+            }
+
+        }
+        static void Output()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine($"Secondary thread: {i}");
             }
         }
     }
